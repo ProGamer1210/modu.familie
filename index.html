@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101310">
+  <title>MODU – Dein 3D-Druck-Wunschshop</title>
+  <meta name="description" content="MODU – private 3D-Druck-Wünsche für Familie und Freunde. Gestalte deinen eigenen Druck.">
+
+  <style>
+    :root {
+      --bg: #101310;
+      --panel: #191e19;
+      --panel-light: #202720;
+      --green: #a5e66b;
+      --text: #f4f6f1;
+      --muted: #b0b8ad;
+      --border: #303a30;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(16, 19, 16, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      padding: 100px 0 85px;
+      background:
+        radial-gradient(ellipse at 80% 15%, #294021 0%, transparent 38%),
+        var(--bg);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      max-width: 800px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.06;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 9px;
+      padding: 14px 22px;
+      background: var(--green);
+      color: #15200f;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: #c0f38e;
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 5vw, 43px);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      max-width: 650px;
+      color: var(--muted);
+    }
+
+    .idea-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .product-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: #293a24;
+      color: var(--green);
+      font-size: 27px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card .mini-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .note {
+      border-left: 3px solid var(--green);
+      padding: 15px 18px;
+      background: #192019;
+      border-radius: 0 9px 9px 0;
+      color: var(--muted);
+      margin-top: 25px;
+    }
+
+    .request-section {
+      background: #141814;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.8fr);
+      gap: 25px;
+      align-items: start;
+    }
+
+    .form-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .form-card h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .field {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-weight: normal;
+      font-size: 12px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 13px;
+      color: var(--text);
+      background: #111511;
+      border: 1px solid #394339;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #788276;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .dimensions label {
+      font-size: 12px;
+    }
+
+    .help {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    .checkbox-line {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 18px 0;
+    }
+
+    .checkbox-line input {
+      width: auto;
+      margin-top: 5px;
+      accent-color: var(--green);
+    }
+
+    .form-card .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    .side-card {
+      background: var(--panel-light);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 17px;
+    }
+
+    .side-card h3 {
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    .side-card p, .side-card li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .side-card ul {
+      padding-left: 19px;
+    }
+
+    .side-card li {
+      margin: 8px 0;
+    }
+
+    .contact-box {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 8px 0 18px;
+    }
+
+    .email {
+      color: var(--green);
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .status {
+      display: none;
+      margin-top: 16px;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--green);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 760px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 15px 0;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .hero {
+        padding: 70px 0;
+      }
+
+      .idea-grid, .form-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .dimensions {
+        gap: 7px;
+      }
+
+      .form-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="#start" aria-label="MODU Startseite">MODU<span>.</span></a>
+        <div class="nav-links">
+          <a href="#idee">Die Idee</a>
+          <a href="#produkte">Druckideen</a>
+          <a href="#wunsch">Wunsch einreichen</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="container">
+        <div class="eyebrow">Kleine Ideen. Selbst gemacht.</div>
+        <h1>Deine Idee.<br>Dein Druck.<br><span>MODU.</span></h1>
+        <p>
+          Willkommen bei MODU! Hier kann meine Familie eigene Ideen für
+          3D-Drucke einreichen. Farbe, Größe und Details bestimmst du.
+          Ich prüfe anschließend, ob und wie sich dein Wunsch umsetzen lässt.
+        </p>
+        <a class="button" href="#wunsch">Druckwunsch einreichen ↗</a>
+        <a class="button secondary" href="#produkte" style="margin-left:8px">Ideen ansehen</a>
+      </div>
+    </section>
+
+    <section id="idee">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Was ist MODU?</div>
+          <h2>Aus Ideen werden Dinge.</h2>
+          <p>
+            MODU ist mein persönliches 3D-Druckprojekt. Ich möchte lernen,
+            eigene Produkte zu gestalten und praktische Dinge für den Alltag
+            herzustellen – angefangen bei den Wünschen meiner Familie.
+          </p>
+        </div>
+
+        <div class="idea-grid">
+          <article class="card">
+            <div class="product-icon">✳</div>
+            <h3>Individuell</h3>
+            <p>Du kannst deine Wunschfarbe, Maße und besondere Details angeben.</p>
+          </article>
+          <article class="card">
+            <div class="product-icon">⌁</div>
+            <h3>Praktisch</h3>
+            <p>Von Haltern bis zu kleinen Boxen: Wir suchen eine Lösung für deinen Alltag.</p>
+          </article>
+          <article class="card">
+            <div class="product-icon">◇</div>
+            <h3>Gemeinsam</h3>
+            <p>Deine Idee ist der Anfang. Vor dem Druck klären wir gemeinsam die Details.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="produkte">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Die MODU-Reihe</div>
+          <h2>Ein paar Ideen zum Start.</h2>
+          <p>Diese Beispiele helfen dir bei der Inspiration. Du kannst auch etwas ganz anderes vorschlagen.</p>
+        </div>
+
+        <div class="idea-grid">
+          <article class="card">
+            <div class="product-icon">⌁</div>
+            <h3>MODU Clip</h3>
+            <p>Ein kleiner Halter, der Kabel ordentlich am Schreibtisch hält.</p>
+            <a class="mini-link" href="#wunsch" data-product="Kabelhalter">Ähnliches wünschen →</a>
+          </article>
+          <article class="card">
+            <div class="product-icon">⌑</div>
+            <h3>MODU Headset Holder</h3>
+            <p>Ein stabiler Platz für ein Headset oder Kopfhörer.</p>
+            <a class="mini-link" href="#wunsch" data-product="Headset-Halter">Ähnliches wünschen →</a>
+          </article>
+          <article class="card">
+            <div class="product-icon">▤</div>
+            <h3>MODU Box</h3>
+            <p>Eine kleine Aufbewahrungsbox für Zubehör und andere Kleinigkeiten.</p>
+            <a class="mini-link" href="#wunsch" data-product="Aufbewahrungsbox">Ähnliches wünschen →</a>
+          </article>
+          <article class="card">
+            <div class="product-icon">▦</div>
+            <h3>MODU Organizer</h3>
+            <p>Eine mögliche Lösung für Stifte, Werkzeuge oder Schreibtischzubehör.</p>
+            <a class="mini-link" href="#wunsch" data-product="Organizer">Ähnliches wünschen →</a>
+          </article>
+          <article class="card">
+            <div class="product-icon">⌂</div>
+            <h3>Deine eigene Idee</h3>
+            <p>Du hast etwas im Kopf, das hier nicht dabei ist? Beschreibe es einfach.</p>
+            <a class="mini-link" href="#wunsch" data-product="">Eigene Idee einreichen →</a>
+          </article>
+        </div>
+
+        <div class="note">
+          Die Beispiele sind Inspiration und keine Garantie, dass jeder Gegenstand
+          direkt gedruckt werden kann. Ich prüfe jeden Wunsch zuerst.
+        </div>
+      </div>
+    </section>
+
+    <section class="request-section" id="wunsch">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Deine Anfrage</div>
+          <h2>Was soll ich drucken?</h2>
+          <p>
+            Fülle das Formular aus. Deine Angaben werden in eine E-Mail
+            übernommen, die du anschließend selbst absenden kannst.
+          </p>
+        </div>
+
+        <div class="form-layout">
+          <form class="form-card" id="requestForm">
+            <h3>Dein Druckwunsch</h3>
+
+            <div class="field">
+              <label for="name">Dein Name *</label>
+              <input id="name" name="name" maxlength="80" required
+                     placeholder="z. B. Oma, Papa oder Lisa">
+            </div>
+
+            <div class="field">
+              <label for="product">Was soll gedruckt werden? *</label>
+              <input id="product" name="product" maxlength="120" required
+                     placeholder="z. B. Handyhalter oder kleine Box">
+            </div>
+
+            <div class="field">
+              <label for="color">Wunschfarbe *</label>
+              <select id="color" name="color" required>
+                <option value="">Bitte auswählen</option>
+                <option>Schwarz</option>
+                <option>Weiß</option>
+                <option>Grau</option>
+                <option>Rot</option>
+                <option>Blau</option>
+                <option>Grün</option>
+                <option>Gelb</option>
+                <option>Mehrfarbig – falls möglich</option>
+                <option>Andere Farbe – siehe Beschreibung</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Gewünschte Größe in Millimetern <span class="optional">(optional)</span></label>
+              <div class="dimensions">
+                <div>
+                  <label for="length">Länge</label>
+                  <input id="length" name="length" type="number" min="1" max="256"
+                         step="1" placeholder="z. B. 100">
+                </div>
+                <div>
+                  <label for="width">Breite</label>
+                  <input id="width" name="width" type="number" min="1" max="256"
+                         step="1" placeholder="z. B. 60">
+                </div>
+                <div>
+                  <label for="height">Höhe</label>
+                  <input id="height" name="height" type="number" min="1" max="256"
+                         step="1" placeholder="z. B. 40">
+                </div>
+              </div>
+              <span class="help">Du kennst die Maße nicht? Lass die Felder leer und beschreibe deine Idee.</span>
+            </div>
+
+            <div class="field">
+              <label for="quantity">Stückzahl *</label>
+              <input id="quantity" name="quantity" type="number" min="1" max="100"
+                     value="1" required>
+            </div>
+
+            <div class="field">
+              <label for="details">Weitere Wünsche und Beschreibung *</label>
+              <textarea id="details" name="details" maxlength="2000" required
+                        placeholder="Wofür brauchst du es? Welche Form soll es haben? Gibt es besondere Wünsche?"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="tip">Freiwilliges Trinkgeld in Euro <span class="optional">(optional)</span></label>
+              <input id="tip" name="tip" type="number" min="0" max="1000"
+                     step="0.50" value="0" placeholder="0">
+              <span class="help">
+                Kein fester Preis. 0 € ist völlig in Ordnung.
+                Das Feld ist nur ein Vorschlag und keine Zahlung.
+              </span>
+            </div>
+
+            <label class="checkbox-line" for="confirm">
+              <input type="checkbox" id="confirm" required>
+              <span>Ich weiß, dass dies zunächst nur eine Anfrage ist. Der Druck wird erst nach persönlicher Absprache vereinbart.</span>
+            </label>
+
+            <button class="button" type="submit">Druckwunsch per E-Mail senden ↗</button>
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+          </form>
+
+          <aside>
+            <div class="side-card">
+              <h3>So geht's</h3>
+              <ul>
+                <li>Formular ausfüllen.</li>
+                <li>Auf den E-Mail-Button klicken.</li>
+                <li>Die Angaben im E-Mail-Entwurf prüfen.</li>
+                <li>Die E-Mail selbst absenden.</li>
+                <li>Wir besprechen gemeinsam, ob der Druck möglich ist.</li>
+              </ul>
+            </div>
+
+            <div class="side-card">
+              <h3>Keine festen Preise</h3>
+              <p>
+                Es gibt keine Preisliste und keinen Bezahlvorgang.
+                Das Trinkgeld ist freiwillig und wird nicht automatisch abgebucht.
+              </p>
+            </div>
+
+            <div class="side-card">
+              <h3>Gut zu wissen</h3>
+              <p>
+                Ein Druck hängt von Material, Größe, Form und Druckzeit ab.
+                Deshalb wird erst nach der Anfrage geklärt, was machbar ist.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Kontakt</div>
+          <h2>Eine Frage zu MODU?</h2>
+        </div>
+
+        <div class="contact-box">
+          <h3>Schreib mir eine E-Mail.</h3>
+          <p>Für Fragen oder wenn du lieber direkt schreiben möchtest:</p>
+          <a class="email" href="mailto:modu.druck@gmail.com">modu.druck@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> MODU</span>
+      <span>Ein privates 3D-Druckprojekt für die Familie.</span>
+    </div>
+  </footer>
+
+  <script>
+    const CONTACT_EMAIL = "modu.druck@gmail.com";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Produktbeispiele übernehmen den Namen in das Wunschformular.
+    document.querySelectorAll("[data-product]").forEach(function(link) {
+      link.addEventListener("click", function() {
+        const product = link.dataset.product;
+        if (product) {
+          document.getElementById("product").value = product;
+        }
+      });
+    });
+
+    document.getElementById("requestForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const data = new FormData(form);
+
+      function value(name, fallback = "Nicht angegeben") {
+        const result = String(data.get(name) || "").trim();
+        return result || fallback;
+      }
+
+      const length = value("length", "");
+      const width = value("width", "");
+      const height = value("height", "");
+
+      let dimensions = "Nicht angegeben";
+      if (length || width || height) {
+        dimensions =
+          (length || "?") + " × " +
+          (width || "?") + " × " +
+          (height || "?") + " mm";
+      }
+
+      const tipValue = Number(data.get("tip") || 0);
+      const tip = tipValue.toLocaleString("de-AT", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + " €";
+
+      const subject = "MODU – Neuer Druckwunsch: " + value("product");
+
+      const body = [
+        "Hallo MODU!",
+        "",
+        "hier ist mein 3D-Druckwunsch:",
+        "",
+        "Name: " + value("name"),
+        "Gewünschter Druck: " + value("product"),
+        "Farbe: " + value("color"),
+        "Maße (Länge × Breite × Höhe): " + dimensions,
+        "Stückzahl: " + value("quantity"),
+        "Freiwilliges Trinkgeld: " + tip,
+        "",
+        "Weitere Wünsche:",
+        value("details"),
+        "",
+        "Ich weiß, dass dies eine Anfrage ist und der Druck erst nach Absprache vereinbart wird.",
+        "",
+        "Bitte gib mir Bescheid, ob der Druck möglich ist."
+      ].join("\n");
+
+      const mailto =
+        "mailto:" + CONTACT_EMAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      const status = document.getElementById("status");
+      status.style.display = "block";
+      status.textContent =
+        "Dein E-Mail-Entwurf wird geöffnet. Bitte kontrolliere die Angaben und drücke in deinem E-Mail-Programm selbst auf „Senden“. Falls sich kein E-Mail-Programm öffnet, schreibe an " +
+        CONTACT_EMAIL + " und kopiere deine Angaben hinein.";
+
+      // Öffnet nur einen E-Mail-Entwurf; es wird nichts automatisch versendet.
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
